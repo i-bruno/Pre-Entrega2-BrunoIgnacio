@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <link rel="stylesheet" href="estilo.css">
+    <script type="text/javascript">
+        //Suma total de votos
+        function sumar (){
+            var votos1 = Number(document.getElementById('votos1').value);
+            var votos2 = Number(document.getElementById('votos2').value);
+            var votos3 = Number(document.getElementById('votos3').value);
+            var votos4 = Number(document.getElementById('votos4').value);
+            var votos5 = Number(document.getElementById('votos5').value);
+            var votosBlanco = Number(document.getElementById('votosBlanco').value);
+
+            var votosTotal = votos1 + votos2 + votos3 + votos4 + votos5 + votosBlanco;
+
+            document.getElementById('votosTotal').value = votosTotal;
+
+        //Calculo de porcentajes de votos
+            var porcentaje1 = Number(parseFloat(Math.round(votos1*100)/document.getElementById('votosTotal').value).toFixed(3));
+            var porcentaje2 = Number(parseFloat(Math.round(votos2*100)/document.getElementById('votosTotal').value).toFixed(3));
+            var porcentaje3 = Number(parseFloat(Math.round(votos3*100)/document.getElementById('votosTotal').value).toFixed(3));
+            var porcentaje4 = Number(parseFloat(Math.round(votos4*100)/document.getElementById('votosTotal').value).toFixed(3));
+            var porcentaje5 = Number(parseFloat(Math.round(votos5*100)/document.getElementById('votosTotal').value).toFixed(3));
+            var porcentajeBlanco = Number(parseFloat(Math.round(votosBlanco*100)/document.getElementById('votosTotal').value).toFixed(2));
+
+            var porcentajeTotal = porcentaje1 + porcentaje2 + porcentaje3 + porcentaje4 + porcentaje5 + porcentajeBlanco;
+
+            document.getElementById('porcentajeTotal').value = parseFloat(Math.round(porcentajeTotal).toFixed(3));
+        
+            document.getElementById('porcentaje1').value = porcentaje1;
+            document.getElementById('porcentaje2').value = porcentaje2;
+            document.getElementById('porcentaje3').value = porcentaje3;
+            document.getElementById('porcentaje4').value = porcentaje4;
+            document.getElementById('porcentaje5').value = porcentaje5;
+            document.getElementById('porcentajeBlanco').value = porcentajeBlanco;
+
+            //Comisión directiva
+            var cd1;
+
+            if (porcentaje1<50) {
+                var cd1 = 15;
+            } else {
+                var cd1 = parseFloat((((porcentaje1-50)/100)*15)+15).toFixed(3);
+            };
+
+            var minoriaCD = 20 - cd1;
+
+            var cocienteCD = (votos2 + votos3 + votos4 + votos5)/minoriaCD;
+            
+            var cd2 = votos2/cocienteCD;
+            var cd3 = votos3/cocienteCD;
+            var cd4 = votos4/cocienteCD;
+            var cd5 = votos5/cocienteCD;
+
+            var cdTotal = cd1 + cd2 + cd3 + cd4 + cd5;
+            
+            document.getElementById('cd1').value = cd1;
+            document.getElementById('cd2').value = parseFloat(cd2).toFixed(3);
+            document.getElementById('cd3').value = parseFloat(cd3).toFixed(3);
+            document.getElementById('cd4').value = parseFloat(cd4).toFixed(3);
+            document.getElementById('cd5').value = parseFloat(cd5).toFixed(3);
+            document.getElementById('cdTotal').value = parseFloat(cdTotal).toFixed(3);
+
+            //Comisión Fiscalizadora
+            var cocienteFisca = votosTotal/7;
+
+            var fisca1 = votos1/cocienteFisca;
+            var fisca2 = votos2/cocienteFisca;
+            var fisca3 = votos3/cocienteFisca;
+            var fisca4 = votos4/cocienteFisca;
+            var fisca5 = votos5/cocienteFisca;
+
+            var fiscaTotal = fisca1 + fisca2 + fisca3 + fisca4 + fisca5;
+
+            document.getElementById('fisca1').value = parseFloat((fisca1).toFixed(3));
+            document.getElementById('fisca2').value = parseFloat((fisca2).toFixed(3));
+            document.getElementById('fisca3').value = parseFloat((fisca3).toFixed(3));
+            document.getElementById('fisca4').value = parseFloat((fisca4).toFixed(3));
+            document.getElementById('fisca5').value = parseFloat((fisca5).toFixed(3));
+            document.getElementById('fiscaTotal').value = parseFloat((fiscaTotal).toFixed(3));
+
+            //Asamblea de Representantes
+            var ar1;
+
+            if (porcentaje1<50) {
+                var ar1 = 60;
+            } else {
+                var ar1 = parseFloat((((porcentaje1-50)/100)*60)+60).toFixed(3);
+            };
+
+            var minoriaAR = 90 - ar1;
+
+            var cocienteAR = (votos2 + votos3 + votos4 + votos5)/minoriaAR; 
+
+            var ar2 = votos2/cocienteAR;
+            var ar3 = votos3/cocienteAR;
+            var ar4 = votos4/cocienteAR;
+            var ar5 = votos5/cocienteAR;
+
+            var arTotal = ar1 + ar2 + ar3 + ar4 + ar5;
+
+            document.getElementById('ar1').value = parseFloat(ar1).toFixed(3);
+            document.getElementById('ar2').value = parseFloat(ar2).toFixed(3);
+            document.getElementById('ar3').value = parseFloat(ar3).toFixed(3);
+            document.getElementById('ar4').value = parseFloat(ar4).toFixed(3);
+            document.getElementById('ar5').value = parseFloat(ar5).toFixed(3);
+            document.getElementById('arTotal').value = parseFloat(arTotal).toFixed(3);
+
+        }
+    </script>
+    
+    <title>Calculadora</title>
+</head>
+<body>
+    <header>
+        <div class="row">
+        <div class="container col-12">
+        <h1>
+            Calculadora de Cargos
+        </h1>
+        <h2>
+            Elecciones CASLA 2022
+        </h2>
+        <p>
+            Programa para calcular los cargos que deberá ocupar cada agrupación luego de las elecciones celebradas el 17 de diciembre de 2022
+        </p>
+        </div>
+        </div>
+    </header>
+
+    <hr>
+
+    <section class="desc">
+        <p>
+            Introduzca el nombre de cada lista y la cantidad de votos que le correspondan de mayor a menor, siendo la primer fila correspondiente a la lista ganadora de la elección. También establezca la cantidad de votos en blanco o anulados.
+        </p>
+    </section>
+    </div>
+    </div>
+    
+    <div class="row">
+        <div class="container col-lg-8 m-0">
+    <section class="calculadora">
+        <div class="table-responsive">
+        <table id="tabla">
+            <form action="calculos.php" method="get">
+                <tbody>
+                    <tr>
+                        <th rowspan="2">
+                            Lista
+                        </th>
+                        <th rowspan="2">
+                            Votos
+                        </th>
+                        <th rowspan="2">
+                            Porcentaje
+                        </th>
+                        <th colspan="3">
+                            Cargos
+                        </th>
+                    </tr>
+                    <tr>
+                        <th>
+                            Comisión Directiva
+                        </th>
+                        <th>
+                            Comisión Fiscalizadora
+                        </th>
+                        <th>
+                            Asamblea de Representantes
+                        </th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <select class="form-select form-select-sm" aria-label="Default select example">
+                                <option selected>Seleccionar agrupación</option>
+                                <option value="1">Boedo en Acción</option>
+                                <option value="2">Renovación Sanlorencista</option>
+                                <option value="3">San Lorenzo Querido</option>
+                                <option value="4">Siempre San Lorenzo</option>
+                                <option value="5">Volver a San Lorenzo</option>
+                            </select>
+                        </td>
+                        <td>
+                            <input type="text" class="votos1" name="votos1" id="votos1">
+                        </td>
+                        <td>
+                            <input type="text" class="porcentaje1" name="porcentaje1" id="porcentaje1" disabled>
+                        </td>
+                        <td>
+                            <input type="text" class="cd" name="cd1" id="cd1" disabled>
+                        </td>
+                        <td>
+                            <input type="text" class="fisca" name="fisca1" id="fisca1" disabled>
+                        </td>
+                        <td>
+                            <input type="text" class="ar" name="ar1" id="ar1" disabled>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <select class="form-select form-select-sm" aria-label="Default select example">
+                                <option selected>Seleccionar agrupación</option>
+                                <option value="1">Boedo en Acción</option>
+                                <option value="2">Renovación Sanlorencista</option>
+                                <option value="3">San Lorenzo Querido</option>
+                                <option value="4">Siempre San Lorenzo</option>
+                                <option value="5">Volver a San Lorenzo</option>
+                            </select>
+                        </td>
+                        <td>
+                            <input type="text" class="votos" name="votos2" id="votos2">
+                        </td>
+                        <td>
+                            <input type="text" class="votos" name="porcentaje1" id="porcentaje2" disabled>
+                        </td>
+                        <td>
+                            <input type="text" class="cd" name="cd2" id="cd2" disabled>
+                        </td>
+                        <td>
+                            <input type="text" class="fisca" name="fisca2" id="fisca2" disabled>
+                        </td>
+                        <td>
+                            <input type="text" class="ar" name="ar2" id="ar2" disabled>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <select class="form-select form-select-sm" aria-label="Default select example">
+                                <option selected>Seleccionar agrupación</option>
+                                <option value="1">Boedo en Acción</option>
+                                <option value="2">Renovación Sanlorencista</option>
+                                <option value="3">San Lorenzo Querido</option>
+                                <option value="4">Siempre San Lorenzo</option>
+                                <option value="5">Volver a San Lorenzo</option>
+                            </select>
+                        </td>
+                        <td>
+                            <input type="text" class="votos" name="votos3" id="votos3">
+                        </td>
+                        <td>
+                            <input type="text" class="votos" name="porcentaje1" id="porcentaje3" disabled>
+                        </td>
+                        <td>
+                            <input type="text" class="cd" name="cd3" id="cd3" disabled>
+                        </td>
+                        <td>
+                            <input type="text" class="fisca" name="fisca3" id="fisca3" disabled>
+                        </td>
+                        <td>
+                            <input type="text" class="ar" name="ar3" id="ar3" disabled>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <select class="form-select form-select-sm" aria-label="Default select example">
+                                <option selected>Seleccionar agrupación</option>
+                                <option value="1">Boedo en Acción</option>
+                                <option value="2">Renovación Sanlorencista</option>
+                                <option value="3">San Lorenzo Querido</option>
+                                <option value="4">Siempre San Lorenzo</option>
+                                <option value="5">Volver a San Lorenzo</option>
+                            </select>
+                        </td>
+                        <td>
+                            <input type="text" class="votos" name="votos4" id="votos4">
+                        </td>
+                        <td>
+                            <input type="text" class="votos" name="porcentaje1" id="porcentaje4" disabled>
+                        </td>
+                        <td>
+                            <input type="text" class="cd" name="cd4" id="cd4" disabled>
+                        </td>
+                        <td>
+                            <input type="text" class="fisca" name="fisca4" id="fisca4" disabled>
+                        </td>
+                        <td>
+                            <input type="text" class="ar" name="ar4" id="ar4" disabled>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <select class="form-select form-select-sm" aria-label="Default select example">
+                                <option selected>Seleccionar agrupación</option>
+                                <option value="1">Boedo en Acción</option>
+                                <option value="2">Renovación Sanlorencista</option>
+                                <option value="3">San Lorenzo Querido</option>
+                                <option value="4">Siempre San Lorenzo</option>
+                                <option value="5">Volver a San Lorenzo</option>
+                            </select>
+                        </td>
+                        <td>
+                            <input type="text" class="votos" name="votos5" id="votos5">
+                        </td>
+                        <td>
+                            <input type="text" class="votos" name="porcentaje1" id="porcentaje5" disabled>
+                        </td>
+                        <td>
+                            <input type="text" class="cd" name="cd5" id="cd5" disabled>
+                        </td>
+                        <td>
+                            <input type="text" class="fisca" name="fisca5" id="fisca5" disabled>
+                        </td>
+                        <td>
+                            <input type="text" class="ar" name="ar5" id="ar5" disabled>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Blancos/Anulados
+                        </td>
+                        <td>
+                            <input type="text" class="votos" name="votosBlanco" id="votosBlanco">
+                        </td>
+                        <td>
+                            <input type="text" class="votos" name="porcentaje1" id="porcentajeBlanco" disabled>
+                        </td>
+                        <th colspan="3">
+                            Totales
+                        </th>
+                    </tr>
+                    <tr>
+                        <th>
+                            Totales
+                        </th>
+                        <td>
+                            <input type="text" name="votosTotal" id="votosTotal" disabled>
+                        </td>
+                        <td>
+                            <input type="text" class="votos" name="porcentaje1" id="porcentajeTotal" disabled>
+                        </td>
+                        <td>
+                            <input type="text" class="cd" name="cdTotal" id="cdTotal" disabled>
+                        </td>
+                        <td>
+                            <input type="text" class="cd" name="fiscaTotal" id="fiscaTotal" disabled>
+                        </td>
+                        <td>
+                            <input type="text" class="ar" name="arTotal" id="arTotal" disabled>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="6">
+                            <input type="button" value="Calcular" class="boton" name="calcular" onclick="sumar ()">
+                            <input type="reset" value="Resetear" class="boton">
+                            <input type="button" value="Imprimir" class="boton" onclick="javascript:window.print()">
+                        </td>
+                    </tr>
+                </tbody>
+            </form>
+        </table>
+        </div>
+    </section>
+        </div>
+        <div class="container col-lg-4 m-0">
+            <section class="calculadora">
+    <aside>
+        <h3>
+            Estatuto del Club Atlético San Lorenzo de Almagro
+        </h3>
+        <h4>
+            Artículo 46
+        </h4>
+        <p>
+            La Asamblea de representantes es la autoridad suprema de la institución. Se integra con noventa asociados y asociadas, con una integración de mujeres que asegure la representatividad de las asociadas, en proporción siempre a la composición por género del total de la masa societaria vigente al 30 de junio del año en que se celebren las elecciones, en concordancia con el objeto de la Institución, distribuidos en grupos de dos tercios para la mayoria y un tercio para la o las minorías. Los miembros correspondientes a la minoría serán elegidos según el sistema de representación proporcional por cociente. Este cociente será el resultado de dividir la suma de los votos obtenidos por las listas minoritarias por el número de miembros que corresponden a la minoría, siempre que dichos votos sean superiores al cincuenta por ciento (50%) de los votos obtenidos por la mayoría. Si las minorías obtuvieran en total menos del cincuenta por ciento (50%) de los votos obtenidos por la mayoría, ésta participará del cociente para distribuir cargos con la minoría. Obtenido el número definitivo de los representantes para la mayoría, el resto de los cargos a ocupar se distribuirá entre la o las minorías según la relación entre votos obtenidos y y el cociente. En ningún caso las minorías, en conjunto, podrán tener menos de quince (15) representantes, cualesquiera fuera el número de votos obtenidos. En este caso, la mayoría cederá las diferencias en representantes a las fracciones según el número de votos de las minorías.
+        </p><br>
+        <h4>
+            Artículo 103
+        </h4>
+        <p>
+            Realizado el cómputo final en lo que hace a los asambleístas, la Junta Electoral proclamará electos a los que ocupen los primeros puestos de la lista que hubiese obtenido el mayor número de votos hasta completar el total de sesenta (60) cargos del total de los cargos a elegir, salvo que hubiese obtenido un porcentaje mayor al cincuenta por ciento de los votos, en cuyo caso se le adjudicará el número de asambleístas que corresponda porcentualmente a esa demasía. El cupo restante -o el menor que corresponda si la lista que salió primera en los comicios obtuviera más del cincuenta por ciento de los votos escrutados, se adjudicará a las restantes listas en proporción al número de votos obtenidos por cada una, a cuyo efecto se observarán las reglas consignadas en el artículo 46.
+        </p><br>
+        <h4>
+            Artículo 104
+        </h4>
+        <p>
+            Igual procedimiento se seguirá para designar a los que habrán de integrar la Comisión Directiva, adjudicandose los quince primeros lugares del total de sus componentes a la lista que obtenga el mayor número de votos, salvo que hubiese que hubiese obtenido un porcentaje al cincuenta por ciento de los votos, en cuyo caso se adjudicará el número de miembras que corresponda a esa demasía, observándose para este caso la regla consignada en el artículo 46. Los otros cinco (5) cargos -o los que resten en su caso- se adjudicarán a las demás listas, siempre que hubieran obtenido un número superior al cuatro (4) porciento de los votos emitidos, que es el piso mínimo establecido para obtener al menos un cargo en Comisión Directiva.
+        </p><br>
+        <h4>
+            Artículo 105
+        </h4>
+        <p>
+            Si dos o mas listas empataran en la mayor cantidad de votos obtenidos para cada una, se aplicará el siguiente procedimiento:
+        </p>
+        <ol>
+            <li>
+                Los dos tercios o el setenta y cinco porciento de los cargos se distribuirá entre las empatadas en partes iguales.
+            </li>
+            <li>
+                El cincuenta por ciento de los votos obtenidos por cada una de las listas que hubieran empatado y el total de los obtenidos por las demás listas, será sumado.
+            </li>
+            <li>
+                El cincuenta por ciento de los votos obtenidos por cada una de las listas que hubieran empatado y el total de los obtenidos por las demás listas, será sumado.
+            </li>
+            <li>
+                El cincuenta por ciento de los votos obtenidos por cada una de las listas que hubieran empatado y el total de los obtenidos por las demás listas, será sumado.
+            </li>
+            <li>
+                El cincuenta por ciento de los votos obtenidos por cada una de las listas que hubieran empatado y el total de los obtenidos por las demás listas, será sumado.
+            </li>
+        </ol>
+        <br>
+        <h3>
+            Artículo 106
+        </h3>
+        <p>
+            Los cargos de la Comisión Fiscalizadora se adjudicarán dividiendo el total de los votos emitidos por siete. El número de votos obtenidos por cada lista se dividirá luego por este cociente y el nuevo que resulte dará el número que corresponda a cada una, adjudicándose a los mayores residuos los que falten. la Junta Electoral procederá de inmediato a proclamar electos y hasta completar el número asignado, a los candidatos que ocupan los puestos en cada lista. Acto continuo, extenderá sus nombramientos y los convocará para que celebren sesión constitutiva dentro de los plazos establecidos. Los restantes integrantes de las listas quedarán como miembros reemplazantes de los electos por cada una, para el caso de vacancia.
+        </p>
+    </aside>
+    </section>
+</div>
+    
+    </div>
+    <footer>
+        <h6>
+            Prueba
+        </h6>
+
+    </footer>
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+</body>
+</html>
